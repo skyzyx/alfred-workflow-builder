@@ -11,7 +11,9 @@
 
 namespace Alfred;
 
+use Exception;
 use RuntimeException;
+use SimpleXMLElement;
 use Alfred\Utilities as Util;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Process\Process;
@@ -126,13 +128,6 @@ class Workflow
 			$data = json_decode($data, true);
 		}
 
-		// Still not an array?
-		if (!is_array($data))
-		{
-			throw new Exception('$data must be an associative array or a JSON string. ' .
-				'Found a ' . gettype($data) . ' instead.');
-		}
-
 		// Use existing results if available.
 		if (!empty($this->results))
 		{
@@ -154,7 +149,7 @@ class Workflow
 			{
 				switch ($key)
 				{
-					'icon':
+					case 'icon':
 						$kind = substr($value, 0, 8);
 						if (in_array($kind, array('filetype', 'fileicon'), true))
 						{
@@ -168,7 +163,7 @@ class Workflow
 						}
 						break;
 
-					'valid' :
+					case 'valid' :
 						if ($value === 'yes' || $value === 'no')
 						{
 							$xitem->addAttribute('valid', $value);
