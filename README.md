@@ -52,7 +52,7 @@ If you'd also like logging, we recommend [Monolog](monolog).
 use Alfred\Workflow;
 
 $w = new Workflow('com.ryanparman.my-workflow');
-#=> &lt;Alfred\Workflow>
+#=> <Alfred\Workflow>
 ```
 
 ### Properties
@@ -232,7 +232,7 @@ echo $w->toXML();
 use Alfred\Storage\Plist;
 
 $plist = new Plist('com.ryanparman.my-workflow');
-#=> &lt;Alfred\Storage\Plist>
+#=> <Alfred\Storage\Plist>
 ```
 
 
