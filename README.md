@@ -53,6 +53,7 @@ If you'd also like logging, we recommend [Monolog](monolog).
 [original-class]: https://github.com/jdfwarrior/Workflows
 [requests]: http://requests.ryanmccue.info
 
+----
 
 ## `Alfred\Workflow`
 
@@ -63,16 +64,14 @@ $w = new Workflow('com.ryanparman.my-workflow');
 #=> <Alfred\Workflow>
 ```
 
-### Methods
-
-#### `string` toXML()
+### `string` toXML()
 Accepts a properly formatted array or json object and converts it to XML for creating Alfred feedback results. If results
 have been created using the `result()` function, then passing no arguments will use the array of results created using
 the `result()` function. Arrays passed in must be an associative array with array key values for the following required
 values: `uid`, `arg`, `title`, `subtitle` and `icon`. You may also pass array `key => value` pairs for the following
 optional keys: `valid` and `autocomplete`.
 
-##### Example using result function
+#### Example using result function
 ```php
 $w->result(array(
     'uid' => 'itemuid',
@@ -86,7 +85,7 @@ $w->result(array(
 echo $w->toXML();
 ```
 
-##### Example using array
+#### Example using array
 ```php
 $results = array();
 $temp = array(
@@ -102,7 +101,7 @@ array_push($results, $temp);
 echo $w->toXML($results);
 ```
 
-##### Result
+#### Result
 ```xml
 <?xml version="1.0"?>
 <items>
@@ -114,7 +113,7 @@ echo $w->toXML($results);
 </items>
 ```
 
-#### `array` mdfind()
+### `array` mdfind()
 Executes an `mdfind` command and returns results as an array of matching files.
 
 ```php
@@ -124,14 +123,14 @@ $results = $w->mdfind('Alfred 2.app');
 #=> (array) ['/Applications/Alfred 2.app']
 ```
 
-#### `array` result()
+### `array` result()
 Creates a new result item that is cached within the class object. This set of results is available via the `results()`
 functions, or, can be formatted and returned as XML via the `toXML()` function.
 
 Autocomplete value is optional. If no value is specified, it will take the value of the result title. Possible values
 for `$valid` are `yes` and `no` to set the validity of the result item.
 
-##### Example
+#### Example
 ```php
 $w->result(array (
     'uid' => 'alfred',
@@ -145,7 +144,7 @@ $w->result(array (
 echo $w->toXML();
 ```
 
-##### Result
+#### Result
 ```xml
 <?xml version="1.0"?>
 <items>
@@ -168,16 +167,14 @@ $plist = new Plist('com.ryanparman.my-workflow');
 #=> <Alfred\Storage\Plist>
 ```
 
-### Methods
-
-#### `string` setValue()
+### `string` setValue()
 Stores a key-value pair.
 
 ```php
 $plist->setValue('username', 'rparman');
 ```
 
-#### `string` setValues()
+### `string` setValues()
 Stores a series of key-value pairs.
 
 ```php
@@ -188,7 +185,7 @@ $plist->setValues(array(
 ));
 ```
 
-#### `string` getValue()
+### `string` getValue()
 Retrieves the value of a key.
 
 ```php
