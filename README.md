@@ -75,12 +75,12 @@ optional keys: `valid` and `autocomplete`.
 #### Example using result function
 ```php
 $w->result(array(
-    'uid' => 'itemuid',
-    'arg' => 'itemarg',
-    'title' => 'Some Item Title',
-    'subtitle' => 'Some item subtitle',
-    'icon' => 'icon.png',
-    'valid' => 'yes',
+    'uid'          => 'itemuid',
+    'arg'          => 'itemarg',
+    'title'        => 'Some Item Title',
+    'subtitle'     => 'Some item subtitle',
+    'icon'         => 'icon.png',
+    'valid'        => 'yes',
     'autocomplete' => 'autocomplete'
 ));
 echo $w->toXML();
@@ -90,12 +90,12 @@ echo $w->toXML();
 ```php
 $results = array();
 $temp = array(
-    'uid' => 'itemuid',
-    'arg' => 'itemarg',
-    'title' => 'Some Item Title',
-    'subtitle' => 'Some item subtitle',
-    'icon' => 'icon.png',
-    'valid' => 'yes',
+    'uid'          => 'itemuid',
+    'arg'          => 'itemarg',
+    'title'        => 'Some Item Title',
+    'subtitle'     => 'Some item subtitle',
+    'icon'         => 'icon.png',
+    'valid'        => 'yes',
     'autocomplete' => 'autocomplete'
 );
 array_push($results, $temp);
@@ -170,12 +170,12 @@ functions, or, can be formatted and returned as XML via the `toXML()` function.
 #### Example
 ```php
 $w->result(array (
-    'uid' => 'alfred',
-    'arg' => 'alfredapp',
-    'title' => 'Alfred',
-    'subtitle' => '/Applications/Alfred.app',
-    'icon' => 'fileicon:/Applications/Alfred.app',
-    'valid' => 'yes',
+    'uid'          => 'alfred',
+    'arg'          => 'alfredapp',
+    'title'        => 'Alfred',
+    'subtitle'     => '/Applications/Alfred.app',
+    'icon'         => 'fileicon:/Applications/Alfred.app',
+    'valid'        => 'yes',
     'autocomplete' => 'Alfredapp',
 ));
 echo $w->toXML();
