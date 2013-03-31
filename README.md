@@ -116,6 +116,11 @@ $results = $w->mdfind('Alfred 2.app');
 #=> (array) ['/Applications/Alfred 2.app']
 ```
 
+You can learn more about querying the OS X metadata service by checking out:
+* [Using Spotlight from the OS X Commandline](http://0xfe.blogspot.com/2006/03/using-spotlight-from-os-x-commandline.html)
+* [File Metadata Query Expression Syntax](https://developer.apple.com/library/mac/#documentation/carbon/conceptual/spotlightquery/concepts/queryformat.html)
+* [Spotlight Metadata Attributes](https://developer.apple.com/library/mac/#documentation/carbon/Reference/MetadataAttributesRef/Reference/CommonAttrs.html#//apple_ref/doc/uid/TP40001694-SW1)
+
 ### `array` result()
 Creates a new result item that is cached within the class object. This set of results is available via the `results()`
 functions, or, can be formatted and returned as XML via the `toXML()` function.
