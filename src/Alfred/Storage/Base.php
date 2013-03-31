@@ -10,7 +10,7 @@ namespace Alfred\Storage;
 
 use Alfred\Exception\JsonException;
 
-class Base
+abstract class Base
 {
 	/**
 	 * Determines the best location for writing the .plist data.

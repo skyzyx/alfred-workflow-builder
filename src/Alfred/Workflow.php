@@ -52,6 +52,30 @@ class Workflow
 	private $results = array();
 
 	/**
+	 * Gets the value of the specified property.
+	 *
+	 * @param  string $name The name of the property.
+	 * @return mixed        The data stored in the property.
+	 */
+	public function __get($name)
+	{
+		return $this->$name;
+	}
+
+	/**
+	 * Gets the value of the specified property.
+	 *
+	 * @param  string $name  The name of the property.
+	 * @param  mixed  $value The value to store.
+	 * @return mixed         The data stored in the property.
+	 */
+	public function __set($name, $value)
+	{
+		$this->$name = $value;
+		return $this->$name;
+	}
+
+	/**
 	 * Instantiates the class.
 	 *
 	 * @param string $bundle_id The bundle ID to give to the workflow.
@@ -94,7 +118,7 @@ class Workflow
 	 * @param  string|array $data An associative array or a JSON string.
 	 * @return string             An XML representation of the array.
 	 */
-	public function toXML($data)
+	public function toXML($data = null)
 	{
 		// Conver JSON into an associative array.
 		if (is_string($data))
