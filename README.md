@@ -11,33 +11,33 @@ allows you to declare the dependencies your project needs and installs them into
 
 1. Add `skyzyx/alfred-workflow-builder` as a dependency in your project's `composer.json` file.
 
-```json
-{
-    "require": {
-        "skyzyx/alfred-workflow-builder": "1.0.*"
-    }
-}
-```
+	```json
+	{
+	    "require": {
+	        "skyzyx/alfred-workflow-builder": "1.0.*"
+	    }
+	}
+	```
 
 2. Download and install Composer.
 
-```bash
-curl -s "http://getcomposer.org/installer" | php
-```
+	```bash
+	curl -s "http://getcomposer.org/installer" | php
+	```
 
 3. Install your dependencies.
 
-```bash
-php composer.phar install --optimize-autoloader
-```
+	```bash
+	php composer.phar install --optimize-autoloader
+	```
 
 4. Require Composer's autoloader.
 Composer also prepares an autoload file that's capable of autoloading all of the classes in any of the libraries that
 it downloads. To use it, just add the following line to your code's bootstrap process.
 
-```php
-require 'vendor/autoload.php';
-```
+	```php
+	require 'vendor/autoload.php';
+	```
 
 The [original version of this class](original-class) (written by [David Ferguson](dferg)) had methods for things like
 caching data to local files and fetching remote data over HTTP. Instead, we recommend you use [Guzzle](guzzle),
