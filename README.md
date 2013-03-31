@@ -60,6 +60,7 @@ If you'd also like logging, we recommend [Monolog](monolog).
 ```php
 use Alfred\Workflow;
 
+// Pass a Bundle ID
 $w = new Workflow('com.ryanparman.my-workflow');
 #=> <Alfred\Workflow>
 ```
@@ -163,6 +164,7 @@ echo $w->toXML();
 ```php
 use Alfred\Storage\Plist;
 
+// Pass a Bundle ID and Plist name
 $plist = new Plist('com.ryanparman.my-workflow');
 #=> <Alfred\Storage\Plist>
 ```
