@@ -1,5 +1,5 @@
 {
-	"name": "alfred/workflow-builder",
+	"name": "skyzyx/alfred-workflow-builder",
 	"homepage": "https://github.com/skyzyx/alfred-workflow-builder",
 	"description":"Workflow Builder for Alfred 2",
 	"keywords":["alfred","workflow"],
