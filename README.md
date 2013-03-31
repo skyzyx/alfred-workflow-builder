@@ -200,7 +200,7 @@ echo $w->toXML();
 use Alfred\Storage\Plist;
 
 // Pass a Bundle ID and Plist name
-$plist = new Plist('com.ryanparman.my-workflow');
+$plist = new Plist('com.ryanparman.my-workflow', 'info');
 #=> <Alfred\Storage\Plist>
 ```
 
