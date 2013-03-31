@@ -60,9 +60,7 @@ $w = new Workflow('com.ryanparman.my-workflow');
 ### `string` toXML()
 Accepts a properly formatted array or json object and converts it to XML for creating Alfred feedback results. If results
 have been created using the `result()` function, then passing no arguments will use the array of results created using
-the `result()` function. Arrays passed in must be an associative array with array key values for the following required
-values: `uid`, `arg`, `title`, `subtitle` and `icon`. You may also pass array `key => value` pairs for the following
-optional keys: `valid` and `autocomplete`.
+the `result()` function.
 
 #### Example using result function
 ```php
@@ -135,33 +133,35 @@ functions, or, can be formatted and returned as XML via the `toXML()` function.
     <tbody>
         <tr>
             <td><code>uid</code></td>
-            <td><p>Unique ID for the search result.</p></td>
+            <td><p>Unique ID for the search result. (Required)</p></td>
         </tr>
         <tr>
             <td><code>arg</code></td>
-            <td><p>Argument for this result. This will get fed into any downstream actions.</p></td>
+            <td><p>Argument for this result. This will get fed into any downstream actions. (Required)</p></td>
         </tr>
         <tr>
             <td><code>title</code></td>
-            <td><p>The main title for the result.</p></td>
+            <td><p>The main title for the result. (Required)</p></td>
         </tr>
         <tr>
             <td><code>subtitle</code></td>
-            <td><p>The subtitle for the result.</p></td>
+            <td><p>The subtitle for the result. (Required)</p></td>
         </tr>
         <tr>
             <td><code>icon</code></td>
-            <td><p>The icon that this result should have. This should typically be <code>icon.png</code>.</p></td>
+            <td><p>The icon that this result should have. This should typically be <code>icon.png</code>. (Required)</p></td>
         </tr>
         <tr>
             <td><code>valid</code></td>
             <td><p>If you press enter with this result selected, should it trigger downstream actions? Valid values are
-                <code>"yes"</code>, <code>"no"</code>, <code>true</code> and <code>false</code>.</p></td>
+                <code>"yes"</code>, <code>"no"</code>, <code>true</code> and <code>false</code>. The default value is
+                <code>"yes"</code>.</p></td>
         </tr>
         <tr>
             <td><code>autocomplete</code></td>
             <td><p>If you press enter with this result selected, what value should pop up as an autocomplete value?
-                (<a href="http://simonbs.dk/post/41727742869/movies-workflow-for-alfred-2-0">Movies</a> is a good example.)</p></td>
+                (<a href="http://simonbs.dk/post/41727742869/movies-workflow-for-alfred-2-0">Movies</a> is a good usage
+                example.)</p></td>
         </tr>
     </tbody>
 </table>
