@@ -6,8 +6,8 @@ with plist settings files, reading and writing data to files, generating Alfred 
 
 ## Installation
 
-[Composer](composer) is the recommended way to install is package. Composer is dependency management tool for PHP that
-allows you to declare the dependencies your project needs and installs them into your project.
+[Composer](http://getcomposer.org) is the recommended way to install is package. Composer is dependency management tool
+for PHP that allows you to declare the dependencies your project needs and installs them into your project.
 
 1. Add `skyzyx/alfred-workflow-builder` as a dependency in your project's `composer.json` file.
 
@@ -39,19 +39,11 @@ it downloads. To use it, just add the following line to your code's bootstrap pr
 	require 'vendor/autoload.php';
 	```
 
-The [original version of this class](original-class) (written by [David Ferguson](dferg)) had methods for things like
-caching data to local files and fetching remote data over HTTP. Instead, we recommend you use [Guzzle](guzzle),
-[Requests](requests) or [Buzz](buzz) for HTTP requests and [Doctrine Cache][doctrine-cache] for local file system caching.
-If you'd also like logging, we recommend [Monolog](monolog).
-
-[buzz]: https://github.com/kriswallsmith/Buzz
-[composer]: http://getcomposer.org
-[dferg]: http://dferg.us
-[doctrine-cache]: http://docs.doctrine-project.org/en/2.0.x/reference/caching.html
-[guzzle]: http://guzzlephp.org
-[monolog]: https://github.com/Seldaek/monolog
-[original-class]: https://github.com/jdfwarrior/Workflows
-[requests]: http://requests.ryanmccue.info
+The [original version of this class](https://github.com/jdfwarrior/Workflows) (written by [David Ferguson](http://dferg.us))
+had methods for things like caching data to local files and fetching remote data over HTTP. Instead, we recommend you use
+[Guzzle](http://guzzlephp.org), [Requests](http://requests.ryanmccue.info) or [Buzz](https://github.com/kriswallsmith/Buzz)
+for HTTP requests and [Doctrine Cache](http://docs.doctrine-project.org/en/2.0.x/reference/caching.html) for local file
+system caching. If you'd also like logging, we recommend [Monolog](https://github.com/Seldaek/monolog).
 
 ----
 
@@ -158,11 +150,13 @@ functions, or, can be formatted and returned as XML via the `toXML()` function.
         </tr>
         <tr>
             <td><code>valid</code></td>
-            <td><p>If you press enter with this result selected, should it trigger downstream actions? Valid values are <code>"yes"</code>, <code>"no"</code>, <code>true</code> and <code>false</code>.</p></td>
+            <td><p>If you press enter with this result selected, should it trigger downstream actions? Valid values are
+                <code>"yes"</code>, <code>"no"</code>, <code>true</code> and <code>false</code>.</p></td>
         </tr>
         <tr>
             <td><code>autocomplete</code></td>
-            <td><p>If you press enter with this result selected, what value should pop up as an autocomplete value? (<a href="http://simonbs.dk/post/41727742869/movies-workflow-for-alfred-2-0">Movies</a> is a good example.)</p></td>
+            <td><p>If you press enter with this result selected, what value should pop up as an autocomplete value?
+                (<a href="http://simonbs.dk/post/41727742869/movies-workflow-for-alfred-2-0">Movies</a> is a good example.)</p></td>
         </tr>
     </tbody>
 </table>
