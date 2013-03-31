@@ -128,8 +128,44 @@ $results = $w->mdfind('Alfred 2.app');
 Creates a new result item that is cached within the class object. This set of results is available via the `results()`
 functions, or, can be formatted and returned as XML via the `toXML()` function.
 
-Autocomplete value is optional. If no value is specified, it will take the value of the result title. Possible values
-for `$valid` are `yes` and `no` to set the validity of the result item.
+<table>
+    <thead>
+        <tr>
+            <th>Key</th>
+            <th>Usage</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>uid</code></td>
+            <td><p>Unique ID for the search result.</p></td>
+        </tr>
+        <tr>
+            <td><code>arg</code></td>
+            <td><p>Argument for this result. This will get fed into any downstream actions.</p></td>
+        </tr>
+        <tr>
+            <td><code>title</code></td>
+            <td><p>The main title for the result.</p></td>
+        </tr>
+        <tr>
+            <td><code>subtitle</code></td>
+            <td><p>The subtitle for the result.</p></td>
+        </tr>
+        <tr>
+            <td><code>icon</code></td>
+            <td><p>The icon that this result should have. This should typically be <code>icon.png</code>.</p></td>
+        </tr>
+        <tr>
+            <td><code>valid</code></td>
+            <td><p>If you press enter with this result selected, should it trigger downstream actions? Valid values are <code>"yes"</code>, <code>"no"</code>, <code>true</code> and <code>false</code>.</p></td>
+        </tr>
+        <tr>
+            <td><code>autocomplete</code></td>
+            <td><p>If you press enter with this result selected, what value should pop up as an autocomplete value? (<a href="http://simonbs.dk/post/41727742869/movies-workflow-for-alfred-2-0">Movies</a> is a good example.)</p></td>
+        </tr>
+    </tbody>
+</table>
 
 #### Example
 ```php
@@ -194,3 +230,6 @@ Retrieves the value of a key.
 $username = $plist->getValue('username');
 #=> (string) rparman
 ```
+
+## More!
+You can learn more about Alfred 2 Workflows by checking out <http://support.alfredapp.com/workflows>.
