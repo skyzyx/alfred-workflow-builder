@@ -13,7 +13,6 @@
 	],
 	"require": {
 		"php": ">=5.3.3",
-		"doctrine/cache": "1.0.*@dev",
 		"seld/jsonlint": ">= 1.1",
 		"symfony/filesystem": "2.*",
 		"symfony/process": "2.*"
