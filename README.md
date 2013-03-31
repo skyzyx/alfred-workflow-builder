@@ -63,82 +63,6 @@ $w = new Workflow('com.ryanparman.my-workflow');
 #=> <Alfred\Workflow>
 ```
 
-### Properties
-
-#### bundle
-The bundle ID for the workflow.
-
-```php
-$bundle = $w->bundle;
-#=> (string) com.ryanparman.my-workflow
-```
-
-#### cache
-The cache directory for the workflow.
-
-```php
-$cache = $w->cache;
-#=> (string) /Users/rparman/Library/Caches/com.runningwithcrayons.Alfred-2/Workflow Data/com.ryanparman.my-workflow
-```
-
-#### data
-The data directory for the workflow.
-
-```php
-$data = $w->data;
-#=> (string) /Users/rparman/Library/Application Support/Alfred 2/Workflow Data/com.ryanparman.my-workflow
-```
-
-#### home
-The current user's `$HOME` directory.
-
-```php
-$home = $w->home;
-#=> (string) /Users/rparman
-```
-
-#### path
-The working directory for the workflow.
-
-```php
-$path = $w->path;
-#=> (string) /Users/rparman/Library/Application Support/Alfred 2/Alfred.alfredpreferences/workflows/com.ryanparman.my-workflow
-```
-
-#### results
-An array containing all of the results so far.
-
-##### Example
-```php
-$w->result(array(
-    'uid' => 'itemuid',
-    'arg' => 'itemarg',
-    'title' => 'Some Item Title',
-    'subtitle' => 'Some item subtitle',
-    'icon' => 'icon.png',
-    'valid' => 'yes',
-    'autocomplete' => 'autocomplete'
-));
-echo var_export($w->results());
-```
-
-##### Results
-```php
-array (
-  0 =>
-  array (
-    'uid' => 'alfred',
-    'arg' => 'alfredapp',
-    'title' => 'Alfred',
-    'subtitle' => '/Applications/Alfred.app',
-    'icon' => 'fileicon:/Applications/Alfred.app',
-    'valid' => 'yes',
-    'autocomplete' => 'Alfredapp',
-  ),
-)
-```
-
-
 ### Methods
 
 #### `string` toXML()
@@ -233,6 +157,7 @@ echo $w->toXML();
 </items>
 ```
 
+----
 
 ## `Alfred\Storage\Plist`
 
@@ -242,7 +167,6 @@ use Alfred\Storage\Plist;
 $plist = new Plist('com.ryanparman.my-workflow');
 #=> <Alfred\Storage\Plist>
 ```
-
 
 ### Methods
 
