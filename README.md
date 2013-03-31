@@ -233,3 +233,8 @@ $username = $plist->getValue('username');
 
 ## More!
 You can learn more about Alfred 2 Workflows by checking out <http://support.alfredapp.com/workflows>.
+
+You can also deconstruct some workflows that are built with Alfred Workflow Builder.
+* [Packagist](https://github.com/skyzyx/packagist.alfredworkflow)
+* [Geolocation](https://github.com/skyzyx/geolocation.alfredworkflow)
+* [Mimetypes](https://github.com/skyzyx/mimetypes.alfredworkflow)
