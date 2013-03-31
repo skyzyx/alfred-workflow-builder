@@ -12,6 +12,95 @@ use Alfred\Exception\JsonException;
 
 abstract class Base
 {
+	const CACHE_PATH = '/Library/Caches/com.runningwithcrayons.Alfred-2/Workflow Data';
+	const DATA_PATH = '/Library/Application Support/Alfred 2/Workflow Data';
+
+	/**
+	 * @type string The cache directory for the workflow.
+	 */
+	private $cache = null;
+
+	/**
+	 * @type string The data directory for the workflow.
+	 */
+	private $data = null;
+
+	/**
+	 * @type string The bundle ID for the workflow.
+	 */
+	private $bundle = null;
+
+	/**
+	 * @type string The working directory for the workflow.
+	 */
+	private $path = null;
+
+	/**
+	 * @type string The current user's `$HOME` directory.
+	 */
+	private $home = null;
+
+	/**
+	 * Gets the value of the specified property.
+	 *
+	 * @param  string $name The name of the property.
+	 * @return mixed        The data stored in the property.
+	 */
+	public function __get($name)
+	{
+		return $this->$name;
+	}
+
+	/**
+	 * Gets the value of the specified property.
+	 *
+	 * @param  string $name  The name of the property.
+	 * @param  mixed  $value The value to store.
+	 * @return mixed         The data stored in the property.
+	 */
+	public function __set($name, $value)
+	{
+		$this->$name = $value;
+		return $this->$name;
+	}
+
+	/**
+	 * Instantiates the class.
+	 *
+	 * @param string $bundle_id The bundle ID to give to the workflow.
+	 */
+	public function __construct($bundle_id)
+	{
+		$fs = new Filesystem;
+
+		$this->path = Util::run('pwd');
+		$this->home = Util::run('printf $HOME');
+
+		if (file_exists('info.plist'))
+		{
+			$plist = new Plist($bundle_id, 'info');
+			$this->bundle = $plist->getValue('bundleid');
+		}
+
+		if (!is_null($bundle_id))
+		{
+			$this->bundle = $bundle_id;
+		}
+
+		$this->cache = $this->home . self::CACHE_PATH . '/' . $this->bundle;
+		$this->data  = $this->home . self::DATA_PATH . '/' . $this->bundle;
+
+		if (!file_exists($this->cache))
+		{
+			$fs->mkdir($this->cache);
+		}
+
+		if (!file_exists($this->data))
+		{
+			$fs->mkdir($this->data);
+		}
+	}
+
 	/**
 	 * Determines the best location for writing the .plist data.
 	 *

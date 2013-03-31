@@ -27,10 +27,12 @@ class Plist extends StorageBase implements StorageInterface
 	/**
 	 * Constructs a new instance of this class.
 	 *
-	 * @param string $plist The identifier for the .plist file to write to (e.g., "info" instead of "info.plist").
+	 * @param string $bundle_id The bundle ID for this workflow.
+	 * @param string $plist     The identifier for the .plist file to write to (e.g., "info" instead of "info.plist").
 	 */
-	public function __construct($plist)
+	public function __construct($bundle_id, $plist)
 	{
+		parent::__construct();
 		$this->plist = $plist . '.plist';
 	}
 
