@@ -9,6 +9,8 @@
 namespace Alfred\Storage;
 
 use Alfred\Exception\JsonException;
+use Alfred\Utilities as Util;
+use Symfony\Component\Filesystem\Filesystem;
 
 abstract class Base
 {

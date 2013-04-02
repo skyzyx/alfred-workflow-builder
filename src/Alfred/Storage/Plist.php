@@ -32,7 +32,7 @@ class Plist extends StorageBase implements StorageInterface
 	 */
 	public function __construct($bundle_id, $plist = 'info')
 	{
-		parent::__construct();
+		parent::__construct($bundle_id);
 		$this->plist = $plist . '.plist';
 	}
 
