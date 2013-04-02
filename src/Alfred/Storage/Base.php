@@ -77,12 +77,7 @@ abstract class Base
 
 		$this->path = Util::run('pwd');
 		$this->home = Util::run('printf $HOME');
-
-		if (file_exists('info.plist'))
-		{
-			$plist = new Plist($bundle_id, 'info');
-			$this->bundle = $plist->getValue('bundleid');
-		}
+		$this->bundle = $bundle_id;
 
 		if (!is_null($bundle_id))
 		{
