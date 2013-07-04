@@ -11,6 +11,7 @@
 
 namespace Alfred;
 
+use DOMDocument;
 use Exception;
 use RuntimeException;
 use SimpleXMLElement;
@@ -60,7 +61,7 @@ class Workflow
 	 */
 	public function toXML($data = null)
 	{
-		// Conver JSON into an associative array.
+		// Convert JSON into an associative array.
 		if (is_string($data))
 		{
 			$data = json_decode($data, true);
@@ -120,7 +121,12 @@ class Workflow
 			}
 		}
 
-		return $items->asXML();
+		$dom_sxe = dom_import_simplexml($items);
+		$dom = new DOMDocument('1.0');
+		$dom_sxe = $dom->appendChild($dom->importNode($dom_sxe, true));
+		$dom->formatOutput = true;
+
+		return $dom->saveXML();
 	}
 
 	/**
