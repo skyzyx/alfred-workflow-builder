@@ -1,0 +1,290 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Alfred Workflow Builder by skyzyx</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Alfred Workflow Builder</h1>
+        <p>Build Alfred workflows with PHP</p>
+
+        <p class="view"><a href="https://github.com/skyzyx/alfred-workflow-builder">View the Project on GitHub <small>skyzyx/alfred-workflow-builder</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/skyzyx/alfred-workflow-builder/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/skyzyx/alfred-workflow-builder/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/skyzyx/alfred-workflow-builder">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a name="alfred-workflow-builder" class="anchor" href="#alfred-workflow-builder"><span class="octicon octicon-link"></span></a>Alfred Workflow Builder</h1>
+
+<p>Alfred Workflow Builder is a PHP class for creating workflows with Alfred 2. This class provides functions for working
+with plist settings files, reading and writing data to files, generating Alfred feedback results, and more.</p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p><a href="http://getcomposer.org">Composer</a> is the recommended way to install is package. Composer is dependency management tool
+for PHP that allows you to declare the dependencies your project needs and installs them into your project.</p>
+
+<ol>
+<li>
+<p>Add <code>skyzyx/alfred-workflow-builder</code> as a dependency in your project's <code>composer.json</code> file.</p>
+
+<div class="highlight"><pre><span class="p">{</span>
+    <span class="nt">"require"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"skyzyx/alfred-workflow-builder"</span><span class="p">:</span> <span class="s2">"1.0.*"</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</li>
+<li>
+<p>Download and install Composer.</p>
+
+<div class="highlight"><pre>curl -s <span class="s2">"http://getcomposer.org/installer"</span> | php
+</pre></div>
+</li>
+<li>
+<p>Install your dependencies.</p>
+
+<div class="highlight"><pre>php composer.phar install --optimize-autoloader
+</pre></div>
+</li>
+<li>
+<p>Require Composer's autoloader.
+Composer also prepares an autoload file that's capable of autoloading all of the classes in any of the libraries that
+it downloads. To use it, just add the following line to your code's bootstrap process.</p>
+
+<div class="highlight"><pre><span class="k">require</span> <span class="s1">'vendor/autoload.php'</span><span class="p">;</span>
+</pre></div>
+</li>
+</ol><p>The <a href="https://github.com/jdfwarrior/Workflows">original version of this class</a> (written by <a href="http://dferg.us">David Ferguson</a>)
+had methods for things like caching data to local files and fetching remote data over HTTP. Instead, we recommend you use
+<a href="http://guzzlephp.org">Guzzle</a>, <a href="http://requests.ryanmccue.info">Requests</a> or <a href="https://github.com/kriswallsmith/Buzz">Buzz</a>
+for HTTP requests and <a href="http://docs.doctrine-project.org/en/2.0.x/reference/caching.html">Doctrine Cache</a> for local file
+system caching. If you'd also like logging, we recommend <a href="https://github.com/Seldaek/monolog">Monolog</a>.</p>
+
+<hr><h2>
+<a name="alfredworkflow" class="anchor" href="#alfredworkflow"><span class="octicon octicon-link"></span></a>Alfred\Workflow</h2>
+
+<div class="highlight"><pre><span class="k">use</span> <span class="nx">Alfred\Workflow</span><span class="p">;</span>
+
+<span class="c1">// Pass a Bundle ID</span>
+<span class="nv">$w</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Workflow</span><span class="p">(</span><span class="s1">'com.ryanparman.my-workflow'</span><span class="p">);</span>
+<span class="c1">#=&gt; &lt;Alfred\Workflow&gt;</span>
+</pre></div>
+
+<h3>
+<a name="string-toxml" class="anchor" href="#string-toxml"><span class="octicon octicon-link"></span></a><code>string</code> toXML()</h3>
+
+<p>Accepts a properly formatted array or json object and converts it to XML for creating Alfred feedback results. If results
+have been created using the <code>result()</code> function, then passing no arguments will use the array of results created using
+the <code>result()</code> function.</p>
+
+<h4>
+<a name="example-using-result-function" class="anchor" href="#example-using-result-function"><span class="octicon octicon-link"></span></a>Example using result function</h4>
+
+<div class="highlight"><pre><span class="nv">$w</span><span class="o">-&gt;</span><span class="na">result</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'uid'</span>          <span class="o">=&gt;</span> <span class="s1">'itemuid'</span><span class="p">,</span>
+    <span class="s1">'arg'</span>          <span class="o">=&gt;</span> <span class="s1">'itemarg'</span><span class="p">,</span>
+    <span class="s1">'title'</span>        <span class="o">=&gt;</span> <span class="s1">'Some Item Title'</span><span class="p">,</span>
+    <span class="s1">'subtitle'</span>     <span class="o">=&gt;</span> <span class="s1">'Some item subtitle'</span><span class="p">,</span>
+    <span class="s1">'icon'</span>         <span class="o">=&gt;</span> <span class="s1">'icon.png'</span><span class="p">,</span>
+    <span class="s1">'valid'</span>        <span class="o">=&gt;</span> <span class="s1">'yes'</span><span class="p">,</span>
+    <span class="s1">'autocomplete'</span> <span class="o">=&gt;</span> <span class="s1">'autocomplete'</span>
+<span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$w</span><span class="o">-&gt;</span><span class="na">toXML</span><span class="p">();</span>
+</pre></div>
+
+<h4>
+<a name="example-using-array" class="anchor" href="#example-using-array"><span class="octicon octicon-link"></span></a>Example using array</h4>
+
+<div class="highlight"><pre><span class="nv">$results</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+<span class="nv">$temp</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+    <span class="s1">'uid'</span>          <span class="o">=&gt;</span> <span class="s1">'itemuid'</span><span class="p">,</span>
+    <span class="s1">'arg'</span>          <span class="o">=&gt;</span> <span class="s1">'itemarg'</span><span class="p">,</span>
+    <span class="s1">'title'</span>        <span class="o">=&gt;</span> <span class="s1">'Some Item Title'</span><span class="p">,</span>
+    <span class="s1">'subtitle'</span>     <span class="o">=&gt;</span> <span class="s1">'Some item subtitle'</span><span class="p">,</span>
+    <span class="s1">'icon'</span>         <span class="o">=&gt;</span> <span class="s1">'icon.png'</span><span class="p">,</span>
+    <span class="s1">'valid'</span>        <span class="o">=&gt;</span> <span class="s1">'yes'</span><span class="p">,</span>
+    <span class="s1">'autocomplete'</span> <span class="o">=&gt;</span> <span class="s1">'autocomplete'</span>
+<span class="p">);</span>
+<span class="nb">array_push</span><span class="p">(</span><span class="nv">$results</span><span class="p">,</span> <span class="nv">$temp</span><span class="p">);</span>
+<span class="k">echo</span> <span class="nv">$w</span><span class="o">-&gt;</span><span class="na">toXML</span><span class="p">(</span><span class="nv">$results</span><span class="p">);</span>
+</pre></div>
+
+<h4>
+<a name="result" class="anchor" href="#result"><span class="octicon octicon-link"></span></a>Result</h4>
+
+<div class="highlight"><pre><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;items&gt;</span>
+    <span class="nt">&lt;item</span> <span class="na">uid=</span><span class="s">"itemuid"</span> <span class="na">arg=</span><span class="s">"itemarg"</span> <span class="na">autocomplete=</span><span class="s">"autocomplete"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Some Item Title<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;subtitle&gt;</span>Some item subtitle<span class="nt">&lt;/subtitle&gt;</span>
+        <span class="nt">&lt;icon&gt;</span>icon.png<span class="nt">&lt;/icon&gt;</span>
+    <span class="nt">&lt;/item&gt;</span>
+<span class="nt">&lt;/items&gt;</span>
+</pre></div>
+
+<h3>
+<a name="array-mdfind" class="anchor" href="#array-mdfind"><span class="octicon octicon-link"></span></a><code>array</code> mdfind()</h3>
+
+<p>Executes an <code>mdfind</code> command and returns results as an array of matching files.</p>
+
+<div class="highlight"><pre><span class="nv">$results</span> <span class="o">=</span> <span class="nv">$w</span><span class="o">-&gt;</span><span class="na">mdfind</span><span class="p">(</span><span class="s1">'"kMDItemContentType == com.apple.mail.emlx"'</span><span class="p">);</span>
+<span class="cm">/* or */</span>
+<span class="nv">$results</span> <span class="o">=</span> <span class="nv">$w</span><span class="o">-&gt;</span><span class="na">mdfind</span><span class="p">(</span><span class="s1">'Alfred 2.app'</span><span class="p">);</span>
+<span class="c1">#=&gt; (array) ['/Applications/Alfred 2.app']</span>
+</pre></div>
+
+<p>You can learn more about querying the OS X metadata service by checking out:</p>
+
+<ul>
+<li><a href="http://0xfe.blogspot.com/2006/03/using-spotlight-from-os-x-commandline.html">Using Spotlight from the OS X Commandline</a></li>
+<li><a href="https://developer.apple.com/library/mac/#documentation/carbon/conceptual/spotlightquery/concepts/queryformat.html">File Metadata Query Expression Syntax</a></li>
+<li><a href="https://developer.apple.com/library/mac/#documentation/carbon/Reference/MetadataAttributesRef/Reference/CommonAttrs.html#//apple_ref/doc/uid/TP40001694-SW1">Spotlight Metadata Attributes</a></li>
+</ul><h3>
+<a name="array-result" class="anchor" href="#array-result"><span class="octicon octicon-link"></span></a><code>array</code> result()</h3>
+
+<p>Creates a new result item that is cached within the class object. This set of results is available via the <code>results()</code>
+functions, or, can be formatted and returned as XML via the <code>toXML()</code> function.</p>
+
+<table>
+<tr>
+<th>Key</th>
+            <th>Usage</th>
+        </tr>
+<tr>
+<td><code>uid</code></td>
+            <td><p>Unique ID for the search result. (Required)</p></td>
+        </tr>
+<tr>
+<td><code>arg</code></td>
+            <td><p>Argument for this result. This will get fed into any downstream actions. (Required)</p></td>
+        </tr>
+<tr>
+<td><code>title</code></td>
+            <td><p>The main title for the result. (Required)</p></td>
+        </tr>
+<tr>
+<td><code>subtitle</code></td>
+            <td><p>The subtitle for the result. (Required)</p></td>
+        </tr>
+<tr>
+<td><code>icon</code></td>
+            <td><p>The icon that this result should have. This should typically be <code>icon.png</code>. (Required)</p></td>
+        </tr>
+<tr>
+<td><code>valid</code></td>
+            <td><p>If you press enter with this result selected, should it trigger downstream actions? Valid values are
+                <code>"yes"</code>, <code>"no"</code>, <code>true</code> and <code>false</code>. The default value is
+                <code>"yes"</code>.</p></td>
+        </tr>
+<tr>
+<td><code>autocomplete</code></td>
+            <td><p>If you press enter with this result selected, what value should pop up as an autocomplete value?
+                (<a href="http://simonbs.dk/post/41727742869/movies-workflow-for-alfred-2-0">Movies</a> is a good usage
+                example.)</p></td>
+        </tr>
+</table><h4>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h4>
+
+<div class="highlight"><pre><span class="nv">$w</span><span class="o">-&gt;</span><span class="na">result</span><span class="p">(</span><span class="k">array</span> <span class="p">(</span>
+    <span class="s1">'uid'</span>          <span class="o">=&gt;</span> <span class="s1">'alfred'</span><span class="p">,</span>
+    <span class="s1">'arg'</span>          <span class="o">=&gt;</span> <span class="s1">'alfredapp'</span><span class="p">,</span>
+    <span class="s1">'title'</span>        <span class="o">=&gt;</span> <span class="s1">'Alfred'</span><span class="p">,</span>
+    <span class="s1">'subtitle'</span>     <span class="o">=&gt;</span> <span class="s1">'/Applications/Alfred.app'</span><span class="p">,</span>
+    <span class="s1">'icon'</span>         <span class="o">=&gt;</span> <span class="s1">'fileicon:/Applications/Alfred.app'</span><span class="p">,</span>
+    <span class="s1">'valid'</span>        <span class="o">=&gt;</span> <span class="s1">'yes'</span><span class="p">,</span>
+    <span class="s1">'autocomplete'</span> <span class="o">=&gt;</span> <span class="s1">'Alfredapp'</span><span class="p">,</span>
+<span class="p">));</span>
+<span class="k">echo</span> <span class="nv">$w</span><span class="o">-&gt;</span><span class="na">toXML</span><span class="p">();</span>
+</pre></div>
+
+<h4>
+<a name="result-1" class="anchor" href="#result-1"><span class="octicon octicon-link"></span></a>Result</h4>
+
+<div class="highlight"><pre><span class="cp">&lt;?xml version="1.0"?&gt;</span>
+<span class="nt">&lt;items&gt;</span>
+    <span class="nt">&lt;item</span> <span class="na">uid=</span><span class="s">"alfred"</span> <span class="na">arg=</span><span class="s">"alfredapp"</span> <span class="na">autocomplete=</span><span class="s">"Alfredapp"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;title&gt;</span>Alfred<span class="nt">&lt;/title&gt;</span>
+        <span class="nt">&lt;subtitle&gt;</span>/Applications/Alfred.app<span class="nt">&lt;/subtitle&gt;</span>
+        <span class="nt">&lt;icon</span> <span class="na">type=</span><span class="s">"fileicon"</span><span class="nt">&gt;</span>/Applications/Alfred.app<span class="nt">&lt;/icon&gt;</span>
+    <span class="nt">&lt;/item&gt;</span>
+<span class="nt">&lt;/items&gt;</span>
+</pre></div>
+
+<hr><h2>
+<a name="alfredstorageplist" class="anchor" href="#alfredstorageplist"><span class="octicon octicon-link"></span></a>Alfred\Storage\Plist</h2>
+
+<div class="highlight"><pre><span class="k">use</span> <span class="nx">Alfred\Storage\Plist</span><span class="p">;</span>
+
+<span class="c1">// Pass a Bundle ID and Plist name</span>
+<span class="nv">$plist</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Plist</span><span class="p">(</span><span class="s1">'com.ryanparman.my-workflow'</span><span class="p">,</span> <span class="s1">'info'</span><span class="p">);</span>
+<span class="c1">#=&gt; &lt;Alfred\Storage\Plist&gt;</span>
+</pre></div>
+
+<h3>
+<a name="string-setvalue" class="anchor" href="#string-setvalue"><span class="octicon octicon-link"></span></a><code>string</code> setValue()</h3>
+
+<p>Stores a key-value pair.</p>
+
+<div class="highlight"><pre><span class="nv">$plist</span><span class="o">-&gt;</span><span class="na">setValue</span><span class="p">(</span><span class="s1">'username'</span><span class="p">,</span> <span class="s1">'rparman'</span><span class="p">);</span>
+</pre></div>
+
+<h3>
+<a name="string-setvalues" class="anchor" href="#string-setvalues"><span class="octicon octicon-link"></span></a><code>string</code> setValues()</h3>
+
+<p>Stores a series of key-value pairs.</p>
+
+<div class="highlight"><pre><span class="nv">$plist</span><span class="o">-&gt;</span><span class="na">setValues</span><span class="p">(</span><span class="k">array</span><span class="p">(</span>
+    <span class="s1">'username'</span> <span class="o">=&gt;</span> <span class="s1">'rparman'</span><span class="p">,</span>
+    <span class="s1">'password'</span> <span class="o">=&gt;</span> <span class="s1">'abc123'</span><span class="p">,</span>
+    <span class="s1">'zipcode'</span>  <span class="o">=&gt;</span> <span class="s1">'90210'</span><span class="p">,</span>
+<span class="p">));</span>
+</pre></div>
+
+<h3>
+<a name="string-getvalue" class="anchor" href="#string-getvalue"><span class="octicon octicon-link"></span></a><code>string</code> getValue()</h3>
+
+<p>Retrieves the value of a key.</p>
+
+<div class="highlight"><pre><span class="nv">$username</span> <span class="o">=</span> <span class="nv">$plist</span><span class="o">-&gt;</span><span class="na">getValue</span><span class="p">(</span><span class="s1">'username'</span><span class="p">);</span>
+<span class="c1">#=&gt; (string) rparman</span>
+</pre></div>
+
+<h2>
+<a name="more" class="anchor" href="#more"><span class="octicon octicon-link"></span></a>More!</h2>
+
+<p>You can learn more about Alfred 2 Workflows by checking out <a href="http://support.alfredapp.com/workflows">http://support.alfredapp.com/workflows</a>.</p>
+
+<p>You can also deconstruct some workflows that are built with Alfred Workflow Builder.</p>
+
+<ul>
+<li><a href="https://github.com/skyzyx/packagist.alfredworkflow">Packagist</a></li>
+<li><a href="https://github.com/skyzyx/geolocation.alfredworkflow">Geolocation</a></li>
+<li><a href="https://github.com/skyzyx/mimetypes.alfredworkflow">Mimetypes</a></li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/skyzyx">skyzyx</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
